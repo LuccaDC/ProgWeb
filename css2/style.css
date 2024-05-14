@@ -1,0 +1,25 @@
+body{
+    background-image: url(ringnebula.png);
+    background-color: lightgray;
+    background-size: 100vw 150vh;
+    background-repeat: no-repeat;
+    background-position-y: -200px;
+}
+
+div {
+    align-self: self-start;
+    width: 240px;
+    color: white;
+    margin-left: 50px;
+    margin-top:75px;
+    border: thick rgb(202, 126, 54) solid;
+    background-color: rgba(0, 0, 0, .75);
+    border-radius: 20px;
+    padding: 15px;
+}
+
+p {
+    font-size: 24px;
+    text-align: center;
+    
+}
