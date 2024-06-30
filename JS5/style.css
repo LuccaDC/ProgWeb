@@ -1,0 +1,20 @@
+#chart {
+    display: flex;
+    align-items: flex-end;
+    height: 150px;
+    margin-top: 20px;
+}
+.bar {
+    background-color: red;
+    margin-right: 5px;
+    display: inline-block;
+    width: 30px;
+}
+
+#btn{ margin-top: 20px;}
+
+#bar1 { height: 100px; }
+#bar2 { height: 150px; }
+#bar3 { height: 120px; }
+#bar4 { height: 80px; }
+#bar5 { height: 40px; }
