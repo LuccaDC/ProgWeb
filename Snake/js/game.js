@@ -1,6 +1,7 @@
 (function () {
   let FPS = 10;
   let speed = 0;
+  let points = 0;
   let pause = false;
   let dead = false;
   let eated = false;
@@ -39,6 +40,9 @@
         break;
       case "p":
         pauseGame();
+        break;
+      case "s":
+        location.reload();
         break;
       default:
         break;
@@ -79,6 +83,7 @@
           // Check Border Collision
           if (head[0] <= 1){
             dead = true;
+            document.getElementById("gameover").innerHTML = "Game Over!";
             console.log("GAME OVER: Colidiu com o fim do mapa.");
           }
           break;
@@ -87,6 +92,7 @@
           // Check Border Collision
           if (head[1] >= 40){
             dead = true;
+            document.getElementById("gameover").innerHTML = "Game Over!";
             console.log("GAME OVER: Colidiu com o fim do mapa.");
           }
           break;
@@ -95,6 +101,7 @@
           // Check Border Collision
           if (head[0] >= 40){
             dead = true;
+            document.getElementById("gameover").innerHTML = "Game Over!";
             console.log("GAME OVER: Colidiu com o fim do mapa.");
           }
           break;
@@ -103,6 +110,7 @@
           // Check Border Collision
           if (head[1] <= 1){
             dead = true;
+            document.getElementById("gameover").innerHTML = "Game Over!";
             console.log("GAME OVER: Colidiu com o fim do mapa.");
           }
           break;
@@ -126,6 +134,7 @@
       for (let i = 0; i < this.body.length - 2; i++) {
           if (newhead[0] == this.body[i][0] && newhead[1] == this.body[i][1]) {
               dead = true;
+              document.getElementById("gameover").innerHTML = "Game Over!";
               console.log("GAME OVER: Colidiu com o próprio corpo.")
               break;
           }
@@ -136,6 +145,11 @@
       if (newHead[0] == fruit.coordinate[0] && newHead[1] == fruit.coordinate[1]){
         eated = true;
         this.body.push(newHead);
+        if (fruit.type == 2)
+          points += 2;
+        else
+          points +=1;
+        document.getElementById("points").innerHTML = ("000" + points).slice(-4)
         document.querySelector(`#board tr:nth-child(${newHead[0]}) td:nth-child(${newHead[1]})`).style.backgroundColor = this.color;
         newFruit(fruit, this);
       }
@@ -148,7 +162,9 @@
 
   class Fruit {
     constructor(x,y){
-      this.color = "red";
+      this.type = 1;
+      this.color = "black";
+      this.doublecolor = "red";
       this.coordinate = [x, y];
       document.querySelector(`#board tr:nth-child(${x}) td:nth-child(${y})`).style.backgroundColor = this.color;
     }
@@ -171,14 +187,19 @@
         }
       }
     } while (conflict);
+
+    fruit.type = Math.floor(Math.random() * 3);
     document.querySelector(`#board tr:nth-child(${fruit.coordinate[0]}) td:nth-child(${fruit.coordinate[1]})`).style.backgroundColor = snake.color;
     fruit.coordinate = [xFruit, yFruit];
-    document.querySelector(`#board tr:nth-child(${fruit.coordinate[0]}) td:nth-child(${fruit.coordinate[1]})`).style.backgroundColor = fruit.color;
+    if (fruit.type == 2)
+      document.querySelector(`#board tr:nth-child(${fruit.coordinate[0]}) td:nth-child(${fruit.coordinate[1]})`).style.backgroundColor = fruit.doublecolor;
+    else
+      document.querySelector(`#board tr:nth-child(${fruit.coordinate[0]}) td:nth-child(${fruit.coordinate[1]})`).style.backgroundColor = fruit.color;
   }
 
   function timer(){
     if (pause == false && dead == false){
-      speed += 2;
+      speed += 1;
       console.log("Speed: "+speed);
     }
   }

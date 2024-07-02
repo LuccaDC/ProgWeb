@@ -7,3 +7,10 @@
   width: 16px;
   height: 16px;
 }
+
+#placar{
+  height: 60px;
+  width: 806px;
+  display: flex;
+  justify-content: space-between;
+}
