@@ -1,0 +1,47 @@
+<div class="d-flex justify-content-between">
+    <h3>Cursos</h3>
+    <div><a href="major/create" class="btn btn-primary">+</a></div>
+</div>
+
+<table class="table table-hover">
+   <thead>
+    <tr>
+      <th scope="col">Sigla</th>
+      <th scope="col">Nome</th>
+      <th scope="col" style="text-align: right;">Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each majors}}
+    <tr>
+      <th style="vertical-align: middle;" scope="row">{{code}}</th>
+      <td style="vertical-align: middle;">{{name}}</td>
+      <td style="text-align: right;">
+        <a href="major/read/{{id}}" class="btn btn-primary">Ver</a>
+        <a href="major/update/{{id}}" class="btn btn-warning">Editar</a>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{id}}">
+        Deletar
+        </button>
+      </td>
+      
+        <div class="modal fade" id="deleteModal{{id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModal{{id}}Label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteModal{{id}}Label">Deletar Curso</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Tens certeza que deseja deletar este curso?
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <form method="POST" action="/major/remove/{{id}}"><button class="btn btn-danger">Deletar Curso</button></form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

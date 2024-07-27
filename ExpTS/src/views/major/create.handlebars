@@ -1,0 +1,20 @@
+<div class="d-flex justify-content-between">
+    <h1>Criação de Curso</h1>
+    <div><a href="/major" class="btn btn-primary">Voltar</a></div>
+</div>
+
+<form action="/major/create" method="POST">
+    <div class="form-group mt-3">
+        <label for="name">Nome</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome do curso" required>
+    </div>
+    <div class="form-group mt-3">
+        <label for="code">Sigla</label>
+        <input type="text" class="form-control" id="code" name="code" placeholder="Digite a sigla do curso" required>
+    </div>
+    <div class="form-group mt-3">
+        <label for="description">Descrição</label>
+        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Digite uma descrição do curso"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Criar</button>
+</form>

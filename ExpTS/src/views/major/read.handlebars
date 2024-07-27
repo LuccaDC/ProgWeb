@@ -1,0 +1,34 @@
+<div style="position-absolute">
+    <div class="card position-absolute top-50 start-50 translate-middle" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{major.name}}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{major.code}}</h6>
+            <p class="card-text">{{major.description}}</p>
+            <div class="d-flex justify-content-between">
+                <a href="/major/update/{{major.id}}" class="btn btn-warning">Editar</a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{major.id}}">
+                    Deletar
+                </button>
+            </div>
+        </div>
+    </div>
+    <div><a href="/major" style="float: right;" class="btn btn-primary">Voltar</a></div>
+</div>
+
+<div class="modal fade" id="deleteModal{{major.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModal{{major.id}}Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="deleteModal{{major.id}}Label">Deletar Curso</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Tens certeza que deseja deletar este curso?
+        </div>
+        <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <form method="POST" action="/major/remove/{{major.id}}"><button class="btn btn-danger">Deletar Curso</button></form>
+        </div>
+        </div>
+    </div>
+</div>

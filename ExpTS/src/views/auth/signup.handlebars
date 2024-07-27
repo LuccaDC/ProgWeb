@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-between">
+    <h1>Cadastro de Usuário</h1>
+</div>
+
+<form action="/auth/signup" method="POST" id="signup">
+    <div class="form-group mt-3">
+        <label for="name">Nome</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Digite seu nome completo" required>
+    </div>
+    <div class="form-group mt-3">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
+    </div>
+    <div class="form-group mt-3">
+        <label for="majorId">Selecione seu Curso</label>
+        <select class="form-select" aria-label="Selecione seu Curso" id="majorId" name="majorId">
+            {{#each majors}}
+            <option value="{{id}}">{{name}}</option>
+            {{/each}}
+        </select>
+    </div>
+
+    <div class="form-group mt-3">
+        <label for="password">Senha</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha" required>
+    </div>
+
+    <div class="form-group mt-3">
+        <label for="repeat-password">Confirmar Senha</label>
+        <input type="password" class="form-control" id="repeat-password" placeholder="Repita sua senha" required>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
+</form>
+
+<script>
+    const signup = document.getElementById("signup");
+    signup.addEventListener("submit", (e) => {
+        const password = document.getElementById("password").value;
+        const repeatpassword = document.getElementById("repeat-password").value;
+        if(!password || password !== repeatpassword)
+            e.preventDefault();
+    })
+</script>

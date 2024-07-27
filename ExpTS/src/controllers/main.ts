@@ -1,9 +1,10 @@
 // Arquivo src/controllers/main.ts
 import { Request, Response } from 'express';
 import { loremIpsum } from "lorem-ipsum";
+import { v4 as uuidv4 } from 'uuid';
 
 const index = (req: Request, res: Response) => {
-    res.send("Hello world!");
+    res.render("main/index");
 };
 const lorem = (req: Request, res: Response) => {
     res.send(loremIpsum({
@@ -66,4 +67,24 @@ const hb4 = (req: Request, res: Response) => {
     ];
     res.render('main/hb4', { technologies });
 };
-export default { index, lorem, loremParagraph, hb1, hb2, hb3, hb4};
+
+const createCookie =  (req: Request, res: Response) => {
+    if (!('nomeCookie' in req.cookies)) {
+    res.cookie('nomeCookie', 'valorCookie', { maxAge: 360000 });
+    res.send('Você NUNCA passou por aqui!');
+    } else {
+    res.send('Você JÁ passou por aqui');
+    }
+};
+
+const clearCookie = (req: Request, res: Response) => {
+    res.clearCookie('nomeCookie');
+    res.send('cookie apagado');
+};
+
+const uuid = (req: Request, res:Response) => {
+    const uniqueId = uuidv4();
+    res.send(`UUID: ${uniqueId}`);
+    };
+
+export default { index, lorem, loremParagraph, hb1, hb2, hb3, hb4, createCookie, clearCookie, uuid};

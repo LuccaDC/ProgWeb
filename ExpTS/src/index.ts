@@ -3,7 +3,16 @@ import fs from 'fs';
 import path from 'path';
 import dotenv from "dotenv";
 import { engine } from "express-handlebars";
-import router from './router/router' 
+import cookieParser from "cookie-parser";
+import session from 'express-session';
+import router from './router/router';
+import { v4 as uuidv4 } from "uuid";
+
+declare module "express-session" {
+    interface SessionData{
+        uid: string;
+    }
+}
 
 dotenv.config();
 
@@ -40,8 +49,16 @@ app.engine("handlebars",engine({
     layoutsDir: path.join(__dirname + '/views/layouts'),
     defaultLayout: 'main'
 }));
+app.use(session({
+    genid: () => uuidv4(), // usamos UUID para gerar os SESSID
+    secret: 'Hi9Cf#mK98',
+    resave: true,
+    saveUninitialized: true,
+}));
 app.set("view engine", "handlebars");
 app.set("views", path.join(__dirname + '/views'));
+app.use(cookieParser());
+app.use(express.urlencoded({extended: false}));
 app.use(router);
 
 app.listen(PORT, () => {
